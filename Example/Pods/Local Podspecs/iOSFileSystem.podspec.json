@@ -1,0 +1,22 @@
+{
+  "name": "iOSFileSystem",
+  "version": "0.1.0",
+  "summary": "A short description of iOSFileSystem.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/shared@nomad-go.com/iOSFileSystem",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "shared@nomad-go.com": "nomad@shared-go.com"
+  },
+  "source": {
+    "git": "https://github.com/shared@nomad-go.com/iOSFileSystem.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "iOSFileSystem/Classes/**/*"
+}

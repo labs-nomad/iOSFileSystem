@@ -1,0 +1,6 @@
+framework module iOSFileSystem {
+  umbrella header "iOSFileSystem-umbrella.h"
+
+  export *
+  module * { export * }
+}
