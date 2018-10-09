@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'iOSFileSystem'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of iOSFileSystem.'
+  s.summary          = 'Interact with the iOS file system in a protocol oriented way.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,19 +18,24 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Written in Swift 4.2 the library is based off two main protocols. `Directory` and `File`. You can now build up references to files and directories by conforming to the protocol. 
+
+I provide `Directory` structs for most of the common directories in the sandbox. I also provide a `File` struct for `.png` and `.jpg` files both to serve as an example and to cover you for these two common file types.
                        DESC
 
-  s.homepage         = 'https://github.com/shared@nomad-go.com/iOSFileSystem'
+  s.homepage         = 'https://github.com/labs-nomad/iOSFileSystem'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'shared@nomad-go.com' => 'nomad@shared-go.com' }
-  s.source           = { :git => 'https://github.com/shared@nomad-go.com/iOSFileSystem.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/labs-nomad/iOSFileSystem.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'iOSFileSystem/Classes/**/*'
+
+  s.swift_version = '4.2'
+  
   
   # s.resource_bundles = {
   #   'iOSFileSystem' => ['iOSFileSystem/Assets/*.png']
