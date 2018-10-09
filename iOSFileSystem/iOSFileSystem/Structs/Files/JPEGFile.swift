@@ -14,9 +14,7 @@ public struct JPEGFile: File {
     
     public var name: String
     
-    public var hashValue: Int {
-        return self.path?.hashValue ?? 0
-    }
+
     
     public init(_ url: URL) {
         self.type = url.pathExtension
@@ -29,8 +27,6 @@ public struct JPEGFile: File {
     }
     
     
-    static public  func == (lhs: JPEGFile, rhs: JPEGFile) -> Bool {
-        return lhs.path == rhs.path
-    }
+
     
 }

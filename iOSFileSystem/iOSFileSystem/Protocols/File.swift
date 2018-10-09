@@ -19,6 +19,11 @@ public protocol File: Hashable {
 }
 
 public extension File {
+    
+    public var hashValue: Int {
+        return self.path?.hashValue ?? 0
+    }
+    
     var path: String? {
         let url = self.directory?.url?.appendingPathComponent(self.name).appendingPathExtension(self.type)
         return url?.path
@@ -45,4 +50,9 @@ public extension File {
         
         try data.write(to: url)
     }
+    
+    static public  func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.path == rhs.path
+    }
+    
 }
