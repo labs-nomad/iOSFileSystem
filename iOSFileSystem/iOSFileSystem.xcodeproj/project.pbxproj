@@ -17,6 +17,9 @@
 		CC35EC9A216D1EE300DE04E9 /* DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35EC99216D1EE300DE04E9 /* DocumentsDirectory.swift */; };
 		CC35EC9C216D1EF100DE04E9 /* JPEGFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35EC9B216D1EF100DE04E9 /* JPEGFile.swift */; };
 		CC35EC9F216D42EF00DE04E9 /* DocumentsDirectory_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC35EC9E216D42EF00DE04E9 /* DocumentsDirectory_Tests.swift */; };
+		CCF6AB502177E11600A37E77 /* DeviceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6AB4F2177E11600A37E77 /* DeviceStorage.swift */; };
+		CCF6AB522177E12B00A37E77 /* ByteFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6AB512177E12B00A37E77 /* ByteFormatters.swift */; };
+		CCF6AB542177E31C00A37E77 /* CapacityReadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF6AB532177E31C00A37E77 /* CapacityReadError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		CC35EC9B216D1EF100DE04E9 /* JPEGFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPEGFile.swift; sourceTree = "<group>"; };
 		CC35EC9D216D42EE00DE04E9 /* iOSFileSystemTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSFileSystemTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		CC35EC9E216D42EF00DE04E9 /* DocumentsDirectory_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsDirectory_Tests.swift; sourceTree = "<group>"; };
+		CCF6AB4F2177E11600A37E77 /* DeviceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStorage.swift; sourceTree = "<group>"; };
+		CCF6AB512177E12B00A37E77 /* ByteFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteFormatters.swift; sourceTree = "<group>"; };
+		CCF6AB532177E31C00A37E77 /* CapacityReadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapacityReadError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +125,8 @@
 			children = (
 				CC35EC94216D1E7600DE04E9 /* Files */,
 				CC35EC93216D1E6D00DE04E9 /* Directories */,
+				CCF6AB4F2177E11600A37E77 /* DeviceStorage.swift */,
+				CCF6AB512177E12B00A37E77 /* ByteFormatters.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -135,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				CC35EC91216D1E1C00DE04E9 /* DirectoryError.swift */,
+				CCF6AB532177E31C00A37E77 /* CapacityReadError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -270,9 +279,12 @@
 				CC35EC9A216D1EE300DE04E9 /* DocumentsDirectory.swift in Sources */,
 				CC35EC96216D1EC400DE04E9 /* CacheDirectory.swift in Sources */,
 				CC35EC98216D1ED200DE04E9 /* LibraryDirectory.swift in Sources */,
+				CCF6AB502177E11600A37E77 /* DeviceStorage.swift in Sources */,
+				CCF6AB522177E12B00A37E77 /* ByteFormatters.swift in Sources */,
 				CC35EC9C216D1EF100DE04E9 /* JPEGFile.swift in Sources */,
 				CC35EC92216D1E1C00DE04E9 /* DirectoryError.swift in Sources */,
 				CC35EC8D216D1DDD00DE04E9 /* File.swift in Sources */,
+				CCF6AB542177E31C00A37E77 /* CapacityReadError.swift in Sources */,
 				CC35EC8F216D1DF600DE04E9 /* Directory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
