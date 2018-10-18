@@ -89,9 +89,14 @@ public struct DeviceStorage {
         var folderSize = 0
         let keys: [URLResourceKey] = [URLResourceKey.fileSizeKey]
         let url = URL(fileURLWithPath: folderPath)
-        guard let enumerator = self.manager.enumerator(at: url, includingPropertiesForKeys: keys) else {
+        guard let enumerator = self.manager.enumerator(at: url, includingPropertiesForKeys: keys, options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles, errorHandler: { (url, error) -> Bool in
+            return true
+        }) else {
             throw CapacityReadError.couldNotEnumerate
         }
+//        guard let enumerator = self.manager.enumerator(at: url, includingPropertiesForKeys: keys) else {
+//            throw CapacityReadError.couldNotEnumerate
+//        }
         
         for item in enumerator {
             if let itemURL = item as? URL {
