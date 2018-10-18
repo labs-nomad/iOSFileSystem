@@ -85,20 +85,22 @@ public struct DeviceStorage {
     
     
     internal func sizeOfFolder(_ folderPath: String) throws -> Int64 {
-        let contents = try self.manager.contentsOfDirectory(atPath: folderPath)
-        var folderSize: Int64 = 0
-        for content in contents {
-            do {
-                let fullContentPath = folderPath + "/" + content
-                let fileAttributes = try self.manager.attributesOfItem(atPath: fullContentPath)
-                let folderAttributes = try self.manager.attributesOfFileSystem(forPath: fullContentPath)
-                folderSize += fileAttributes[FileAttributeKey.size] as? Int64 ?? 0
-                folderSize += folderAttributes[FileAttributeKey.size] as? Int64 ?? 0
-            } catch _ {
-                continue
+       // let contents = try self.manager.contentsOfDirectory(atPath: folderPath)
+        var folderSize = 0
+        let keys: [URLResourceKey] = [URLResourceKey.fileSizeKey]
+        let url = URL(fileURLWithPath: folderPath)
+        guard let enumerator = self.manager.enumerator(at: url, includingPropertiesForKeys: keys) else {
+            throw CapacityReadError.couldNotEnumerate
+        }
+        
+        for item in enumerator {
+            if let itemURL = item as? URL {
+                let resourceValues = try itemURL.resourceValues(forKeys: Set(keys))
+                folderSize += resourceValues.totalFileAllocatedSize ?? resourceValues.fileAllocatedSize ?? 0
             }
         }
-        return folderSize
+        
+        return Int64(folderSize)
     }
     
 }

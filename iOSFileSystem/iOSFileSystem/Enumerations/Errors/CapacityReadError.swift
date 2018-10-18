@@ -14,4 +14,5 @@ import Foundation
 /// - noAttribute: Either the `FileAttributeKey.systemSize` key did not return a value or it could not be cast as an `Int64`
 public enum CapacityReadError: Error {
     case noAttribute
+    case couldNotEnumerate
 }
