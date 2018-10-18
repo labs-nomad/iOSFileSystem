@@ -76,26 +76,25 @@ public struct DeviceStorage {
         do{
             let documentsDirectory = try DocumentsDirectory(self.manager)
             let libraryDirectory = try LibraryDirectory(self.manager)
+            guard let documentsPath = documentsDirectory.path, let libraryPath = libraryDirectory.path else {
+                completion(nil, DirectoryError.noPath)
+                return
+            }
+            
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+                do{
+                    let documentsSize = try self.sizeOfFolder(documentsPath)
+                    let librarySize = try self.sizeOfFolder(libraryPath)
+                    let totalSize = documentsSize + librarySize
+                    let tupel = (formatter.string(fromByteCount: totalSize), totalSize)
+                    completion(tupel, nil)
+                }catch{
+                    completion(nil, error)
+                }
+            }
         }catch{
             completion(nil, error)
             return
-        }
-        
-        guard let documentsPath = documentsDirectory.path, let libraryPath = libraryDirectory.path else {
-            completion(nil, DirectoryError.noPath)
-            return
-        }
-        
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-            do{
-                let documentsSize = try self.sizeOfFolder(documentsPath)
-                let librarySize = try self.sizeOfFolder(libraryPath)
-                let totalSize = documentsSize + librarySize
-                let tupel = (formatter.string(fromByteCount: totalSize), totalSize)
-                completion(tupel, nil)
-            }catch{
-                completion(nil, error)
-            }
         }
     }
     
