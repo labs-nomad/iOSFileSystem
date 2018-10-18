@@ -14,6 +14,8 @@ public struct DeviceStorage {
     //MARK: Properties
     let manager: FileManager
     
+    /// Type alias for the completion when calculating the size of the app. The calculation needs to happen on a different thread.
+    public typealias CalculateAppSizeCompletion = (_ tuple: (String, Int64)?, _ error: Error?) -> Void
     //MARK: Init
     /// Initalizer that takes a `FileManager`. The `FileManager` will be used in the calcualtions
     ///
@@ -70,38 +72,49 @@ public struct DeviceStorage {
     /// - Parameter formatter: formatter: The `ByteCountFormatter` you want to use. Defaults to the `mbFormatter` property of the `ByteFormatters` struct.
     /// - Returns: A tuple with the human readable string calcualted by the `ByteCountFormatter` and the raw balue of bytes represented as an `Int64`
     /// - Throws: Can throw a file system error or a `CapacityReadError`
-    public func appDiskSpace(_ formatter: ByteCountFormatter = ByteFormatters().mbFormatter) throws -> (string: String, intValue: Int64) {
-        let documentsDirectory = try DocumentsDirectory(self.manager)
-        let libraryDirectory = try LibraryDirectory(self.manager)
-        guard let documentsPath = documentsDirectory.path, let libraryPath = libraryDirectory.path else {
-            throw DirectoryError.noPath
+    public func appDiskSpace(_ formatter: ByteCountFormatter = ByteFormatters().mbFormatter, completion: @escaping(CalculateAppSizeCompletion)) {
+        do{
+            let documentsDirectory = try DocumentsDirectory(self.manager)
+            let libraryDirectory = try LibraryDirectory(self.manager)
+        }catch{
+            completion(nil, error)
+            return
         }
-        let documentsSize = try self.sizeOfFolder(documentsPath)
-        let librarySize = try self.sizeOfFolder(libraryPath)
-        let totalSize = documentsSize + librarySize
-        return (string: formatter.string(fromByteCount: totalSize), intValue: totalSize)
+        
+        guard let documentsPath = documentsDirectory.path, let libraryPath = libraryDirectory.path else {
+            completion(nil, DirectoryError.noPath)
+            return
+        }
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            do{
+                let documentsSize = try self.sizeOfFolder(documentsPath)
+                let librarySize = try self.sizeOfFolder(libraryPath)
+                let totalSize = documentsSize + librarySize
+                let tupel = (formatter.string(fromByteCount: totalSize), totalSize)
+                completion(tupel, nil)
+            }catch{
+                completion(nil, error)
+            }
+        }
     }
     
     
     
     internal func sizeOfFolder(_ folderPath: String) throws -> Int64 {
-       // let contents = try self.manager.contentsOfDirectory(atPath: folderPath)
         var folderSize = 0
-        let keys: [URLResourceKey] = [URLResourceKey.fileSizeKey]
+        let keys: Set<URLResourceKey> = [URLResourceKey.isRegularFileKey, URLResourceKey.fileAllocatedSizeKey, URLResourceKey.totalFileAllocatedSizeKey, URLResourceKey.fileSizeKey]
         let url = URL(fileURLWithPath: folderPath)
-        guard let enumerator = self.manager.enumerator(at: url, includingPropertiesForKeys: keys, options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles, errorHandler: { (url, error) -> Bool in
+        guard let enumerator = self.manager.enumerator(at: url, includingPropertiesForKeys: Array(keys), options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles, errorHandler: { (url, error) -> Bool in
             return true
         }) else {
             throw CapacityReadError.couldNotEnumerate
         }
-//        guard let enumerator = self.manager.enumerator(at: url, includingPropertiesForKeys: keys) else {
-//            throw CapacityReadError.couldNotEnumerate
-//        }
         
         for item in enumerator {
             if let itemURL = item as? URL {
-                let resourceValues = try itemURL.resourceValues(forKeys: Set(keys))
-                folderSize += resourceValues.totalFileAllocatedSize ?? resourceValues.fileAllocatedSize ?? 0
+                let resourceValues = try itemURL.resourceValues(forKeys: keys)
+                folderSize += resourceValues.totalFileAllocatedSize ?? resourceValues.fileAllocatedSize ?? resourceValues.fileSize ?? 0
             }
         }
         
