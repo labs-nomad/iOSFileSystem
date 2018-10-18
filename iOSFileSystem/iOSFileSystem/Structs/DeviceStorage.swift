@@ -90,8 +90,10 @@ public struct DeviceStorage {
         for content in contents {
             do {
                 let fullContentPath = folderPath + "/" + content
-                let fileAttributes = try FileManager.default.attributesOfItem(atPath: fullContentPath)
+                let fileAttributes = try self.manager.attributesOfItem(atPath: fullContentPath)
+                let folderAttributes = try self.manager.attributesOfFileSystem(forPath: fullContentPath)
                 folderSize += fileAttributes[FileAttributeKey.size] as? Int64 ?? 0
+                folderSize += folderAttributes[FileAttributeKey.size] as? Int64 ?? 0
             } catch _ {
                 continue
             }
