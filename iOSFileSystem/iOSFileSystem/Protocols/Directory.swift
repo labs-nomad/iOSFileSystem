@@ -104,7 +104,7 @@ public extension Directory {
     func exists<T: File>(file: T) throws -> Bool {
         var mutableFile = file
         mutableFile.directory = self
-        guard let path = file.path else {
+        guard let path = mutableFile.path else {
             throw DirectoryError.noPath
         }
         return self.manager.fileExists(atPath: path)
