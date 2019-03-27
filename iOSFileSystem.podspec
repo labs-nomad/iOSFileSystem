@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'iOSFileSystem'
-  s.version          = '0.1.21'
+  s.version          = '0.1.22'
   s.summary          = 'Interact with the iOS file system in a protocol oriented way.'
 
 # This description is used to generate tags and improve search results.
