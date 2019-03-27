@@ -20,8 +20,8 @@ public protocol File: Hashable {
 
 public extension File {
     
-    public var hashValue: Int {
-        return self.path?.hashValue ?? 0
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.path ?? "")
     }
     
     var path: String? {
@@ -51,7 +51,7 @@ public extension File {
         try data.write(to: url)
     }
     
-    static public  func == (lhs: Self, rhs: Self) -> Bool {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.path == rhs.path
     }
     
