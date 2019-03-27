@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'iOSFileSystem'
-  s.version          = '0.1.18'
+  s.version          = '0.1.19'
   s.summary          = 'Interact with the iOS file system in a protocol oriented way.'
 
 # This description is used to generate tags and improve search results.
@@ -34,7 +34,7 @@ I provide `Directory` structs for most of the common directories in the sandbox.
 
   s.source_files = 'iOSFileSystem/**/*.{h,m,swift}'
 
-  s.swift_version = '5'
+  s.swift_versions = ['5']
   
   
   # s.resource_bundles = {
