@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'iOSFileSystem'
-  s.version          = '0.1.17'
+  s.version          = '0.1.18'
   s.summary          = 'Interact with the iOS file system in a protocol oriented way.'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-Written in Swift 4.2 the library is based off two main protocols. `Directory` and `File`. You can now build up references to files and directories by conforming to the protocol. 
+Written in Swift 5 the library is based off two main protocols. `Directory` and `File`. You can now build up references to files and directories by conforming to the protocol. 
 
 I provide `Directory` structs for most of the common directories in the sandbox. I also provide a `File` struct for `.png` and `.jpg` files both to serve as an example and to cover you for these two common file types.
                        DESC
@@ -34,7 +34,7 @@ I provide `Directory` structs for most of the common directories in the sandbox.
 
   s.source_files = 'iOSFileSystem/**/*.{h,m,swift}'
 
-  s.swift_version = '4.2'
+  s.swift_version = '5'
   
   
   # s.resource_bundles = {
