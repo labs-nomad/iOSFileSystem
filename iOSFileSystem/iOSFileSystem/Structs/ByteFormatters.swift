@@ -17,6 +17,8 @@ public struct ByteFormatters {
     public let gbFormatter: ByteCountFormatter
     /// The `ByteCountFormatter` that will format bytes as KB
     public let kbFormatter: ByteCountFormatter
+    /// The `ByteCountFormatter` that will format bytes in all formats
+    public let allFormatter: ByteCountFormatter
     
     /// Initalizer that sets up all the different formatters.
     public init() {
@@ -37,6 +39,12 @@ public struct ByteFormatters {
         self.kbFormatter.allowedUnits = .useKB
         self.kbFormatter.countStyle = .file
         self.kbFormatter.includesUnit = true
+        
+        //Make the all formatter
+        self.allFormatter = ByteCountFormatter()
+        self.allFormatter.allowedUnits = .useAll
+        self.allFormatter.countStyle = .file
+        self.allFormatter.includesUnit = true
         
     }
     
