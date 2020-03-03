@@ -32,7 +32,8 @@ I provide `Directory` structs for most of the common directories in the sandbox.
 
   s.ios.deployment_target = '11.0'
 
-  s.source_files = 'iOSFileSystem/**/*.{h,m,swift}'
+  s.source_files = 'iOSFileSystem/**/*.{h,m}'
+  s.source_files = 'Sources/iOSFileSystem/**/*.swift'
 
   s.swift_version = '4.2'
   
