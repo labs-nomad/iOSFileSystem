@@ -6,6 +6,8 @@
 //  Copyright © 2018 Nomad Company. All rights reserved.
 //
 
+import Foundation
+
 public struct LibraryDirectory: Directory {
     public var manager: FileManager
     

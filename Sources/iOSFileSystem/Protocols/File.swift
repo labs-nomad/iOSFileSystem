@@ -6,6 +6,8 @@
 //  Copyright © 2018 Nomad Company. All rights reserved.
 //
 
+import Foundation
+
 public protocol File: Hashable {
     var data: Data? { get }
     var type: String { get }

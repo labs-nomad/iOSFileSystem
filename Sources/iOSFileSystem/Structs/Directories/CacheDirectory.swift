@@ -5,6 +5,7 @@
 //  Created by Nomad Company on 10/9/18.
 //  Copyright © 2018 Nomad Company. All rights reserved.
 //
+import Foundation
 
 public struct CacheDirectory: Directory {
     public var manager: FileManager

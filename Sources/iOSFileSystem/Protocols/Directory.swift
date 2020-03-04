@@ -5,6 +5,7 @@
 //  Created by Nomad Company on 10/9/18.
 //  Copyright © 2018 Nomad Company. All rights reserved.
 //
+import UIKit
 
 /// Protocol that an object can conform to, to signal that it is a directory
 public protocol Directory {
